@@ -27,72 +27,79 @@ def tanh_activation(x):
 def prepare_feature_vector(analysis_results):
     """Prepare comprehensive feature vector for ML classification"""
     features = []
-    
-    # ELA features (6)
+
+    ela_stats = analysis_results.get('ela_regional_stats', {})
+
     features.extend([
-        analysis_results['ela_mean'],
-        analysis_results['ela_std'],
-        analysis_results['ela_regional_stats']['mean_variance'],
-        analysis_results['ela_regional_stats']['regional_inconsistency'],
-        analysis_results['ela_regional_stats']['outlier_regions'],
-        len(analysis_results['ela_regional_stats']['suspicious_regions'])
+        analysis_results.get('ela_mean', 0.0),
+        analysis_results.get('ela_std', 0.0),
+        ela_stats.get('mean_variance', 0.0),
+        ela_stats.get('regional_inconsistency', 0.0),
+        ela_stats.get('outlier_regions', 0.0),
+        len(ela_stats.get('suspicious_regions', []))
     ])
     
     # SIFT features (3)
     features.extend([
-        analysis_results['sift_matches'],
-        analysis_results['ransac_inliers'],
-        1 if analysis_results['geometric_transform'] else 0
+        analysis_results.get('sift_matches', 0),
+        analysis_results.get('ransac_inliers', 0),
+        1 if analysis_results.get('geometric_transform') else 0
     ])
     
     # Block matching (1)
-    features.append(len(analysis_results['block_matches']))
+    features.append(len(analysis_results.get('block_matches', [])))
     
     # Noise analysis (1)
-    features.append(analysis_results['noise_analysis']['overall_inconsistency'])
+    features.append(analysis_results.get('noise_analysis', {}).get('overall_inconsistency', 0.0))
     
     # JPEG analysis (3)
+    jpeg_analysis = analysis_results.get('jpeg_analysis', {})
     features.extend([
-        analysis_results['jpeg_ghost_suspicious_ratio'],
-        analysis_results['jpeg_analysis']['response_variance'],
-        analysis_results['jpeg_analysis']['double_compression_indicator']
+        analysis_results.get('jpeg_ghost_suspicious_ratio', 0.0),
+        jpeg_analysis.get('response_variance', 0.0),
+        jpeg_analysis.get('double_compression_indicator', 0.0)
     ])
     
     # Frequency domain (2)
+    freq_analysis = analysis_results.get('frequency_analysis', {})
+    dct_stats = freq_analysis.get('dct_stats', {})
     features.extend([
-        analysis_results['frequency_analysis']['frequency_inconsistency'],
-        analysis_results['frequency_analysis']['dct_stats']['freq_ratio']
+        freq_analysis.get('frequency_inconsistency', 0.0),
+        dct_stats.get('freq_ratio', 0.0)
     ])
     
     # Texture analysis (1)
-    features.append(analysis_results['texture_analysis']['overall_inconsistency'])
+    features.append(analysis_results.get('texture_analysis', {}).get('overall_inconsistency', 0.0))
     
     # Edge analysis (1)
-    features.append(analysis_results['edge_analysis']['edge_inconsistency'])
+    features.append(analysis_results.get('edge_analysis', {}).get('edge_inconsistency', 0.0))
     
     # Illumination analysis (1)
-    features.append(analysis_results['illumination_analysis']['overall_illumination_inconsistency'])
+    features.append(analysis_results.get('illumination_analysis', {}).get('overall_illumination_inconsistency', 0.0))
     
     # Statistical features (5)
+    stat_analysis = analysis_results.get('statistical_analysis', {})
     stat_features = [
-        analysis_results['statistical_analysis']['R_entropy'],
-        analysis_results['statistical_analysis']['G_entropy'],
-        analysis_results['statistical_analysis']['B_entropy'],
-        analysis_results['statistical_analysis']['rg_correlation'],
-        analysis_results['statistical_analysis']['overall_entropy']
+        stat_analysis.get('R_entropy', 0.0),
+        stat_analysis.get('G_entropy', 0.0),
+        stat_analysis.get('B_entropy', 0.0),
+        stat_analysis.get('rg_correlation', 0.0),
+        stat_analysis.get('overall_entropy', 0.0)
     ]
     features.extend(stat_features)
     
     # Metadata score (1)
-    features.append(analysis_results['metadata']['Metadata_Authenticity_Score'])
+    features.append(analysis_results.get('metadata', {}).get('Metadata_Authenticity_Score', 0.0))
     
     # Localization features (3)
     if 'localization_analysis' in analysis_results:
         loc_results = analysis_results['localization_analysis']
+        kmeans = loc_results.get('kmeans_localization', {})
+        cluster_means = kmeans.get('cluster_ela_means', [])
         features.extend([
-            loc_results['tampering_percentage'],
-            len(loc_results['kmeans_localization']['cluster_ela_means']),
-            max(loc_results['kmeans_localization']['cluster_ela_means']) if loc_results['kmeans_localization']['cluster_ela_means'] else 0
+            loc_results.get('tampering_percentage', 0.0),
+            len(cluster_means),
+            max(cluster_means) if cluster_means else 0.0
         ])
     else:
         features.extend([0.0, 0, 0.0])
@@ -433,11 +440,13 @@ def classify_manipulation_advanced(analysis_results):
 # ======================= Confidence and Detail Functions =======================
 
 def get_enhanced_confidence_level(score):
-    if score >= 90: return "Sangat Tinggi (>90%)"
-    elif score >= 75: return "Tinggi (75-90%)"
-    elif score >= 60: return "Sedang (60-75%)"
-    elif score >= 45: return "Rendah (45-60%)"
-    else: return "Sangat Rendah (<45%)"
+    """Return standardized confidence level string"""
+    if score >= 75:
+        return "High"
+    elif score >= 60:
+        return "Medium"
+    else:
+        return "Low"
 
 def get_enhanced_copy_move_details(results):
     details = []
