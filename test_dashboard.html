@@ -1,0 +1,329 @@
+
+    <!DOCTYPE html>
+    <html lang="id">
+    <head>
+        <meta charset="UTF-8">
+        <title>Dashboard Laporan Pengujian & Coverage</title>
+        <style>
+            body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; margin: 40px; background-color: #f4f7f9; color: #333; }
+            .container { max-width: 1200px; margin: auto; }
+            .header { text-align: center; margin-bottom: 40px; }
+            .summary-cards { display: flex; gap: 20px; justify-content: center; text-align: center; }
+            .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); flex-grow: 1; }
+            .card h3 { margin-top: 0; color: #555; }
+            .coverage-number { font-size: 3em; font-weight: bold; }
+            table { width: 100%; border-collapse: collapse; margin-top: 40px; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+            th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd; }
+            th { background-color: #f8f8f8; }
+            .progress-bar-bg { background-color: #e9ecef; border-radius: 5px; height: 20px; }
+            .progress-bar { height: 100%; border-radius: 5px; color: white; text-align: center; line-height: 20px; font-size: 12px; }
+            footer { text-align: center; margin-top: 40px; color: #888; }
+            a { color: #007bff; text-decoration: none; }
+            a:hover { text-decoration: underline; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>Dashboard Laporan Pengujian & Coverage</h1>
+                <p>Laporan Dihasilkan pada: 02 July 2025, 18:01:24</p>
+            </div>
+
+            <div class="summary-cards">
+                <div class="card">
+                    <h3>Cakupan Baris (Line)</h3>
+                    <div class="coverage-number" style="color: #4CAF50;">91.8%</div>
+                </div>
+                <div class="card">
+                    <h3>Cakupan Cabang (Branch)</h3>
+                    <div class="coverage-number" style="color: #FFC107;">70.0%</div>
+                </div>
+                <div class="card">
+                    <h3>Tautan Detail</h3>
+                    <p><a href="./coverage_html_report/index.html" target="_blank">Buka Laporan HTML Rinci</a></p>
+                    <p>Laporan ini memberikan detail per baris kode.</p>
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nama File</th>
+                        <th>Cakupan Baris</th>
+                        <th>Cakupan Cabang</th>
+                        <th>Pernyataan (Stmts)</th>
+                        <th>Cabang (Branch)</th>
+                    </tr>
+                </thead>
+                <tbody>
+    
+                    <tr>
+                        <td>generate_test_dashboard.py</td>
+                        <td>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar" style="width: 0.0%; background-color: #F44336;">
+                                    0.0%
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar" style="width: 0.0%; background-color: #F44336;">
+                                    0.0%
+                                </div>
+                            </div>
+                        </td>
+                        <td>45 (45 terlewat)</td>
+                        <td>0 (0 terlewat)</td>
+                    </tr>
+        
+                    <tr>
+                        <td>utils.py</td>
+                        <td>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar" style="width: 86.3%; background-color: #FFC107;">
+                                    86.3%
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar" style="width: 86.1%; background-color: #FFC107;">
+                                    86.1%
+                                </div>
+                            </div>
+                        </td>
+                        <td>124 (17 terlewat)</td>
+                        <td>0 (0 terlewat)</td>
+                    </tr>
+        
+                    <tr>
+                        <td>test_app2.py</td>
+                        <td>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar" style="width: 88.0%; background-color: #FFC107;">
+                                    88.0%
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar" style="width: 70.0%; background-color: #FFC107;">
+                                    70.0%
+                                </div>
+                            </div>
+                        </td>
+                        <td>100 (12 terlewat)</td>
+                        <td>0 (0 terlewat)</td>
+                    </tr>
+        
+                    <tr>
+                        <td>test_export_utils.py</td>
+                        <td>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar" style="width: 89.5%; background-color: #FFC107;">
+                                    89.5%
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar" style="width: 71.4%; background-color: #FFC107;">
+                                    71.4%
+                                </div>
+                            </div>
+                        </td>
+                        <td>153 (16 terlewat)</td>
+                        <td>0 (0 terlewat)</td>
+                    </tr>
+        
+                    <tr>
+                        <td>visualization.py</td>
+                        <td>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar" style="width: 91.5%; background-color: #4CAF50;">
+                                    91.5%
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar" style="width: 62.5%; background-color: #F44336;">
+                                    62.5%
+                                </div>
+                            </div>
+                        </td>
+                        <td>271 (23 terlewat)</td>
+                        <td>0 (0 terlewat)</td>
+                    </tr>
+        
+                    <tr>
+                        <td>test_jpeg_analysis.py</td>
+                        <td>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar" style="width: 96.5%; background-color: #4CAF50;">
+                                    96.5%
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar" style="width: 75.0%; background-color: #FFC107;">
+                                    75.0%
+                                </div>
+                            </div>
+                        </td>
+                        <td>87 (3 terlewat)</td>
+                        <td>0 (0 terlewat)</td>
+                    </tr>
+        
+                    <tr>
+                        <td>test_copy_move_detection.py</td>
+                        <td>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar" style="width: 96.9%; background-color: #4CAF50;">
+                                    96.9%
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar" style="width: 50.0%; background-color: #F44336;">
+                                    50.0%
+                                </div>
+                            </div>
+                        </td>
+                        <td>32 (1 terlewat)</td>
+                        <td>0 (0 terlewat)</td>
+                    </tr>
+        
+                    <tr>
+                        <td>test_main.py</td>
+                        <td>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar" style="width: 98.0%; background-color: #4CAF50;">
+                                    98.0%
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar" style="width: 50.0%; background-color: #F44336;">
+                                    50.0%
+                                </div>
+                            </div>
+                        </td>
+                        <td>50 (1 terlewat)</td>
+                        <td>0 (0 terlewat)</td>
+                    </tr>
+        
+                    <tr>
+                        <td>feature_detection.py</td>
+                        <td>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar" style="width: 98.2%; background-color: #4CAF50;">
+                                    98.2%
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar" style="width: 90.0%; background-color: #4CAF50;">
+                                    90.0%
+                                </div>
+                            </div>
+                        </td>
+                        <td>108 (2 terlewat)</td>
+                        <td>0 (0 terlewat)</td>
+                    </tr>
+        
+                    <tr>
+                        <td>test_feature_detection.py</td>
+                        <td>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar" style="width: 99.4%; background-color: #4CAF50;">
+                                    99.4%
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar" style="width: 83.3%; background-color: #FFC107;">
+                                    83.3%
+                                </div>
+                            </div>
+                        </td>
+                        <td>155 (1 terlewat)</td>
+                        <td>0 (0 terlewat)</td>
+                    </tr>
+        
+                    <tr>
+                        <td>test_visualization.py</td>
+                        <td>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar" style="width: 99.4%; background-color: #4CAF50;">
+                                    99.4%
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar" style="width: 66.7%; background-color: #F44336;">
+                                    66.7%
+                                </div>
+                            </div>
+                        </td>
+                        <td>168 (1 terlewat)</td>
+                        <td>0 (0 terlewat)</td>
+                    </tr>
+        
+                    <tr>
+                        <td>test_utils.py</td>
+                        <td>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar" style="width: 99.4%; background-color: #4CAF50;">
+                                    99.4%
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar" style="width: 50.0%; background-color: #F44336;">
+                                    50.0%
+                                </div>
+                            </div>
+                        </td>
+                        <td>180 (1 terlewat)</td>
+                        <td>0 (0 terlewat)</td>
+                    </tr>
+        
+                    <tr>
+                        <td>config.py</td>
+                        <td>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar" style="width: 100.0%; background-color: #4CAF50;">
+                                    100.0%
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar" style="width: 100.0%; background-color: #4CAF50;">
+                                    100.0%
+                                </div>
+                            </div>
+                        </td>
+                        <td>21 (0 terlewat)</td>
+                        <td>0 (0 terlewat)</td>
+                    </tr>
+        
+                </tbody>
+            </table>
+            
+            <footer>
+                <p>Dashboard ini dihasilkan secara otomatis dari data pengujian dan cakupan kode.</p>
+            </footer>
+        </div>
+    </body>
+    </html>
+    

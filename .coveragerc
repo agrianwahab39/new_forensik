@@ -1,0 +1,20 @@
+[run]
+branch = True
+source = .
+omit =
+    */site-packages/*
+    app2.py
+    advanced_analysis.py
+    classification.py
+    export_utils.py
+    copy_move_detection.py
+    jpeg_analysis.py
+    validation.py
+    ela_analysis.py
+    main.py
+    whitebox_testing.py
+    */config-3.py
+
+[report]
+exclude_lines =
+    pragma: no cover
