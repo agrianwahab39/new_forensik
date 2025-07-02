@@ -24,24 +24,34 @@ def detect_outliers_iqr(data, factor=1.5):
     return np.where((data < lower_bound) | (data > upper_bound))[0]
 
 def calculate_skewness(data):
-    """Calculate skewness with empty-array handling"""
-    if len(data) == 0:
-        return 0
-    mean = np.mean(data)
-    std = np.std(data)
-    if std == 0:
-        return 0
-    return np.mean(((data - mean) / std) ** 3)
+    """Calculate skewness with robust handling of edge cases"""
+    data = np.asarray(data, dtype=float)
+    if data.size == 0:
+        return 0.0
+    with np.errstate(all='ignore'):
+        mean = np.mean(data)
+        std = np.std(data)
+        if std == 0 or np.isnan(std):
+            return 0.0
+        skew = np.mean(((data - mean) / std) ** 3)
+        if np.isnan(skew):
+            return 0.0
+        return float(skew)
 
 def calculate_kurtosis(data):
-    """Calculate kurtosis with empty-array handling"""
-    if len(data) == 0:
-        return 0
-    mean = np.mean(data)
-    std = np.std(data)
-    if std == 0:
-        return 0
-    return np.mean(((data - mean) / std) ** 4) - 3
+    """Calculate kurtosis with robust handling of edge cases"""
+    data = np.asarray(data, dtype=float)
+    if data.size == 0:
+        return 0.0
+    with np.errstate(all='ignore'):
+        mean = np.mean(data)
+        std = np.std(data)
+        if std == 0 or np.isnan(std):
+            return 0.0
+        kurt = np.mean(((data - mean) / std) ** 4) - 3
+        if np.isnan(kurt):
+            return 0.0
+        return float(kurt)
 
 def normalize_array(arr):
     """Normalize array to 0-1 range"""
